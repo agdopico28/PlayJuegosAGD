@@ -68,7 +68,7 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                        label = { Text(text = "Nombre")}
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -80,7 +80,7 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                        label = { Text(text = "Apellidos")}
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -113,7 +113,8 @@ fun NewPlayer(navController: NavHostController) {
                         onClick = { /*TODO*/ },
                         modifier = Modifier
                             .weight(peso1)
-                            .padding(end = 35.dp)
+                            .padding(end = 35.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Blue20)
                     ) {
                         Text(text = "Change")
                     }
@@ -159,7 +160,7 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                        label = { Text(text = "Email")}
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -196,7 +197,7 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")},
+                        label = { Text(text = "Nombre")},
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -213,7 +214,7 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                        label = { Text(text = "Apellidos")}
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -276,7 +277,7 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                        label = { Text(text = "Telefono")}
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -298,7 +299,7 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                        label = { Text(text = "Email")}
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
