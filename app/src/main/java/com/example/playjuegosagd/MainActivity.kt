@@ -12,8 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.playjuegosagd.ui.theme.Portada
-import com.example.playjuegosagd.ui.theme.NewPlayer
 import com.example.playjuegosagd.ui.theme.PlayJuegosAGDTheme
 
 class MainActivity : ComponentActivity() {

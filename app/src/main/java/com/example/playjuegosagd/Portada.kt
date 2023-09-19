@@ -1,4 +1,4 @@
-package com.example.playjuegosagd.ui.theme
+package com.example.playjuegosagd
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.playjuegosagd.R
+import com.example.playjuegosagd.ui.theme.FontTitle
 
 
 /*@Composable
@@ -58,7 +59,8 @@ fun Portada( navController: NavHostController){
                     Text(
                         text = stringResource(id = R.string.playJuegos),
                         fontSize = 40.sp,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontTitle
 
                     )
 
@@ -88,6 +90,7 @@ fun Portada( navController: NavHostController){
                         text = stringResource(id = R.string.playJuegos),
                         fontSize = 40.sp,
                         textAlign = TextAlign.Center,
+                        fontFamily = FontTitle
                     )
 
                     Spacer(modifier = Modifier.size(50.dp))
