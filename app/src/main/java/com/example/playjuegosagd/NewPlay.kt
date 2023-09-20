@@ -3,7 +3,7 @@ package com.example.playjuegosagd
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,30 +12,42 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import com.example.playjuegosagd.R
 import com.example.playjuegosagd.ui.theme.Blue20
+import com.example.playjuegosagd.ui.theme.PurpleGrey80
+import com.example.playjuegosagd.ui.theme.TransPurple
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewPlayer(navController: NavHostController) {
+fun NewPlayer() {
+    var nom by remember{ mutableStateOf("")}
+    var apellido by remember{ mutableStateOf("") }
+    var nickname by remember{ mutableStateOf("") }
+    var email by remember{ mutableStateOf("") }
+    var errorTextName by remember{ mutableStateOf("*Obligatorio") }
+    var errorTextNickname by remember{ mutableStateOf("*Obligatorio") }
     var peso1 = 1f
     var peso2 = 2f
     val configuration = LocalConfiguration.current
@@ -63,39 +75,83 @@ fun NewPlayer(navController: NavHostController) {
                             .fillMaxSize()
                     )
                     TextField(
-                        value = "Nombre",
-                        onValueChange = {},
+                        value = nom,
+                        onValueChange = {nom = it},
+                        modifier = Modifier
+                            .weight(peso2)
+                            .padding(end = 10.dp),
+                        label = { Text(text = "Nombre")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
+                    )
+                }
+                Row(Modifier.height(20.dp)) {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    Text(
+                        text = errorTextName,
+                        modifier = Modifier
+                            .weight(peso2)
+                            .padding(start = 15.dp),
+                        if(errorTextName.equals("Error: Obligatorio")){
+                            Color.Red
+                        }else{
+                            Color.Black
+                        },
+                        fontSize = 12.sp
+                    )
+                }
+
+                Row {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    TextField(
+                        value = apellido,
+                        onValueChange = {apellido = it},
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Nombre")}
+                        label = { Text(text = "Apellidos")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
                 Row {
                     Spacer(modifier = Modifier.weight(peso1))
                     TextField(
-                        value = "Apellidos",
-                        onValueChange = {},
+                        value = nickname,
+                        onValueChange = {nickname = it},
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Apellidos")}
+                        label = { Text(text = "Nickname")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
-                Spacer(modifier = Modifier.size(15.dp))
-                Row {
+                Row(Modifier.height(20.dp)) {
                     Spacer(modifier = Modifier.weight(peso1))
-                    TextField(
-                        value = "Nickname",
-                        onValueChange = {},
-                        Modifier
+                    Text(
+                        text = errorTextNickname,
+                        modifier = Modifier
                             .weight(peso2)
-                            .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                            .padding(start = 15.dp),
+                        if(errorTextNickname.equals("Error: Obligatorio")){
+                            Color.Red
+                        }else{
+                            Color.Black
+                             },
+                        fontSize = 12.sp
                     )
                 }
-                Spacer(modifier = Modifier.size(15.dp))
                 Row(
                     Modifier
                         .height(60.dp)
@@ -138,7 +194,11 @@ fun NewPlayer(navController: NavHostController) {
 
                         Modifier
                             .weight(peso2)
-                            .padding(end = 10.dp)
+                            .padding(end = 10.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -155,15 +215,43 @@ fun NewPlayer(navController: NavHostController) {
                             .fillMaxSize()
                     )
                     TextField(
-                        value = "Email",
-                        onValueChange = {},
+                        value = email,
+                        onValueChange = {email = it},
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Email")}
+                        label = { Text(text = "Email")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
+                Row(
+                    Modifier
+                        .height(60.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically) {
+                    Button(onClick = { if(nom.isEmpty() && nickname.isEmpty()){
+                        errorTextName = "Error: Obligatorio"
+                        errorTextNickname = "Error: Obligatorio"
+                    }else if(nickname.isEmpty() && !nom.isEmpty()){
+                        errorTextNickname = "Error: Obligatorio"
+                        errorTextName = "Listo"
+                    }else if(!nickname.isEmpty() && nom.isEmpty()){
+                        errorTextNickname = "Listo"
+                        errorTextName = "Error: Obligatorio"
+                    }else{
+                        errorTextName = "Listo"
+                        errorTextNickname = "Listo"
+                    } }) {
+                        Text(text = "Add new player")
+
+                    }
+                }
             }
         }
 
@@ -192,12 +280,53 @@ fun NewPlayer(navController: NavHostController) {
                             .fillMaxSize()
                     )
                     TextField(
-                        value = "Nombre",
-                        onValueChange = {},
+                        value = nom,
+                        onValueChange = {nom = it},
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
                         label = { Text(text = "Nombre")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
+                    )
+                }
+                Row(Modifier.height(20.dp)) {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    Text(
+                        text = errorTextName,
+                        modifier = Modifier
+                            .weight(peso2)
+                            .padding(start = 15.dp),
+                        if(errorTextName.equals("Error: Obligatorio")){
+                            Color.Red
+                        }else{
+                            Color.Black
+                        },
+                        fontSize = 12.sp
+                    )
+                }
+                Row(
+                    Modifier
+                        .height(60.dp)
+                        .fillMaxSize()
+
+                ) {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    TextField(
+                        value = apellido,
+                        onValueChange = {apellido = it},
+                        Modifier
+                            .weight(peso2)
+                            .padding(end = 10.dp),
+                        label = { Text(text = "Apellidos")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -209,32 +338,34 @@ fun NewPlayer(navController: NavHostController) {
                 ) {
                     Spacer(modifier = Modifier.weight(peso1))
                     TextField(
-                        value = "Apellidos",
-                        onValueChange = {},
+                        value = nickname,
+                        onValueChange = {nickname = it},
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Apellidos")}
+                        label = { Text(text = "Nickname")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
-                Spacer(modifier = Modifier.size(15.dp))
-                Row(
-                    Modifier
-                        .height(60.dp)
-                        .fillMaxSize()
-
-                ) {
+                Row(Modifier.height(20.dp)) {
                     Spacer(modifier = Modifier.weight(peso1))
-                    TextField(
-                        value = "Nickname",
-                        onValueChange = {},
-                        Modifier
+                    Text(
+                        text = errorTextNickname,
+                        modifier = Modifier
                             .weight(peso2)
-                            .padding(end = 10.dp),
-                        label = { Text(text = "Nickname")}
+                            .padding(start = 15.dp),
+                        if(errorTextNickname.equals("Error: Obligatorio")){
+                            Color.Red
+                        }else{
+                            Color.Black
+                        },
+                        fontSize = 12.sp
                     )
                 }
-                Spacer(modifier = Modifier.size(15.dp))
                 Row(
                     Modifier
                         .height(60.dp)
@@ -277,7 +408,12 @@ fun NewPlayer(navController: NavHostController) {
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Telefono")}
+                        label = { Text(text = "Telefono")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
@@ -294,15 +430,38 @@ fun NewPlayer(navController: NavHostController) {
                             .fillMaxSize()
                     )
                     TextField(
-                        value = "Email",
-                        onValueChange = {},
+                        value = email,
+                        onValueChange = {email =it},
                         Modifier
                             .weight(peso2)
                             .padding(end = 10.dp),
-                        label = { Text(text = "Email")}
+                        label = { Text(text = "Email")},
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
+                Row {
+                    Button(onClick = { if(nom.isEmpty() && nickname.isEmpty()){
+                        errorTextName = "Error: Obligatorio"
+                        errorTextNickname = "Error: Obligatorio"
+                    }else if(nickname.isEmpty() && !nom.isEmpty()){
+                        errorTextNickname = "Error: Obligatorio"
+                        errorTextName = "Listo"
+                    }else if(!nickname.isEmpty() && nom.isEmpty()){
+                        errorTextNickname = "Listo"
+                        errorTextName = "Error: Obligatorio"
+                    }else{
+                        errorTextName = "Listo"
+                        errorTextNickname = "Listo"
+                    } }) {
+                        Text(text = "Add new player")
+
+                    }
+                }
             }
         }
     }

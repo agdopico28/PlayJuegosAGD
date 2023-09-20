@@ -24,27 +24,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                      //verticalArrangement = Arrangement.Center,
                      //horizontalAlignment = Alignment.CenterHorizontally
-                    color = MaterialTheme.colorScheme.background
                 ) {
                      val navController  = rememberNavController()
                      NavHost(navController = navController, startDestination = "Portada"){
-                         composable("NewPlayer") { NewPlayer(navController) }
+                         composable("NewPlayer") { NewPlayer() }
                          composable("Portada") { Portada(navController = navController) }
                      }
 
                 }
             }
         }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PlayJuegosAGDTheme {
-
-
-
     }
 }

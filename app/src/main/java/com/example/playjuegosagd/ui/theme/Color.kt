@@ -8,4 +8,5 @@ val Pink80 = Color(0xFFEFB8C8)
 
 val DarkPurple = Color(0XFF673ab7)
 val LightPurple = Color(0xFFD1C4E9)
+val TransPurple= Color(0xFFe5ccf0)
 val Blue20 = Color(0xFF00bcd4)
