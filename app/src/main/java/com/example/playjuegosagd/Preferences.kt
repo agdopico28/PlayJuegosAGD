@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonColors
@@ -309,7 +310,7 @@ fun Preferences() {
                         onValueChange = { selection = it }
                     )
                 }
-                //FloatingActionButton(FAB)
+                //FloatingActionButton()
 
             }
         }
@@ -335,37 +336,37 @@ fun MyRadioButton(name: String, onItemSelected: (String) -> Unit) {
         Row() {
             RadioButton(selected = name == "dragonFly", onClick = {
                 onItemSelected("dragonFly")
-            })
+            },colors = RadioButtonDefaults.colors(selectedColor = Blue20))
             Text(text = "Dragon Fly", Modifier.padding(top = 12.dp))
         }
         Row() {
             RadioButton(selected = name == "hillClimbingRacing", onClick = {
                 onItemSelected("hillClimbingRacing")
-            })
+            },colors = RadioButtonDefaults.colors(selectedColor = Blue20))
             Text(text = "Hill Climbing Racing", Modifier.padding(top = 12.dp))
         }
         Row() {
             RadioButton(selected = name == "pocketSoccer", onClick = {
                 onItemSelected("pocketSoccer")
-            })
+            },colors = RadioButtonDefaults.colors(selectedColor = Blue20))
             Text(text = "Pocket Soccer", Modifier.padding(top = 12.dp))
         }
         Row() {
             RadioButton(selected = name == "radiantDefense", onClick = {
                 onItemSelected("radiantDefense")
-            })
+            },colors = RadioButtonDefaults.colors(selectedColor = Blue20))
             Text(text = "Radiant Defense", Modifier.padding(top = 12.dp))
         }
         Row() {
             RadioButton(selected = name == "ninjaJump", onClick = {
                 onItemSelected("ninjaJump")
-            })
+            },colors = RadioButtonDefaults.colors(selectedColor = Blue20))
             Text(text = "Ninja Jump", Modifier.padding(top = 12.dp))
         }
         Row() {
             RadioButton(selected = name == "airControl", onClick = {
                 onItemSelected("airControl")
-            })
+            },colors = RadioButtonDefaults.colors(selectedColor = Blue20))
             Text(text = "Air Control", Modifier.padding(top = 12.dp))
         }
     }
