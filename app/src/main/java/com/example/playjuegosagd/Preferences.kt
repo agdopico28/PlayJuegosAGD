@@ -1,0 +1,373 @@
+package com.example.playjuegosagd
+
+import android.content.res.Configuration
+import android.widget.RadioGroup
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.playjuegosagd.ui.theme.Blue20
+import com.example.playjuegosagd.ui.theme.TransPurple
+import java.util.prefs.Preferences
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Preferences() {
+    var nom by remember { mutableStateOf("") }
+    var apellido by remember { mutableStateOf("") }
+    var nickname by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var errorTextName by remember { mutableStateOf("*Obligatorio") }
+    var errorTextNickname by remember { mutableStateOf("*Obligatorio") }
+
+
+    //Slider
+    val range = 0.0f..100.0f
+    val steps = 9
+    var selection by remember { mutableStateOf(50f) }
+
+    var peso1 = 1f
+    var peso2 = 2f
+    val configuration = LocalConfiguration.current
+    when (configuration.orientation) {
+        Configuration.ORIENTATION_LANDSCAPE -> {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Spacer(modifier = Modifier.size(15.dp))
+                Row(
+                    Modifier
+                        .height(60.dp)
+                        .fillMaxSize()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.account),
+                        contentDescription = "AccountImage",
+                        Modifier
+                            .weight(peso1)
+                            .fillMaxSize()
+                    )
+                    TextField(
+                        value = nom,
+                        onValueChange = { nom = it },
+                        modifier = Modifier
+                            .weight(peso2)
+                            .padding(end = 10.dp),
+                        label = { Text(text = "Nombre") },
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
+                    )
+                }
+                Row(Modifier.height(20.dp)) {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    Text(
+                        text = errorTextName,
+                        modifier = Modifier
+                            .weight(peso2)
+                            .padding(start = 15.dp),
+                        if (errorTextName.equals("Error: Obligatorio")) {
+                            Color.Red
+                        } else {
+                            Color.Black
+                        },
+                        fontSize = 12.sp
+                    )
+                }
+
+                Row {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    TextField(
+                        value = apellido,
+                        onValueChange = { apellido = it },
+                        Modifier
+                            .weight(peso2)
+                            .padding(end = 10.dp),
+                        label = { Text(text = "Apellidos") },
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
+                    )
+                }
+                Spacer(modifier = Modifier.size(15.dp))
+                Row {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    TextField(
+                        value = nickname,
+                        onValueChange = { nickname = it },
+                        Modifier
+                            .weight(peso2)
+                            .padding(end = 10.dp),
+                        label = { Text(text = "Nickname") },
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
+                    )
+                }
+                Row(Modifier.height(20.dp)) {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    Text(
+                        text = errorTextNickname,
+                        modifier = Modifier
+                            .weight(peso2)
+                            .padding(start = 15.dp),
+                        if (errorTextNickname.equals("Error: Obligatorio")) {
+                            Color.Red
+                        } else {
+                            Color.Black
+                        },
+                        fontSize = 12.sp
+                    )
+                }
+                Row(
+                    Modifier
+                        .height(60.dp)
+                        .fillMaxWidth()
+                ) {
+                    Spacer(modifier = Modifier.weight(peso1))
+                    Image(
+                        painter = painterResource(id = R.drawable.android),
+                        contentDescription = "Android Icon",
+                        Modifier
+                            .weight(peso1)
+                            .fillMaxSize(),
+                    )
+                    Button(
+                        onClick = { /*TODO*/ },
+                        modifier = Modifier
+                            .weight(peso1)
+                            .padding(end = 35.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Blue20)
+                    ) {
+                        Text(text = "Change")
+                    }
+                }
+                Spacer(modifier = Modifier.size(15.dp))
+                Row(
+                    Modifier
+                        .height(60.dp)
+                        .fillMaxSize()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.camera),
+                        contentDescription = "CameraImage",
+                        Modifier
+                            .weight(peso1)
+                            .fillMaxSize()
+                    )
+                    TextField(
+                        value = "Telefono",
+                        onValueChange = {},
+
+                        Modifier
+                            .weight(peso2)
+                            .padding(end = 10.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
+                    )
+                }
+                Spacer(modifier = Modifier.size(15.dp))
+                Row(
+                    Modifier
+                        .height(60.dp)
+                        .fillMaxSize()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.email),
+                        contentDescription = "EmailImage",
+                        Modifier
+                            .weight(peso1)
+                            .fillMaxSize()
+                    )
+                    TextField(
+                        value = email,
+                        onValueChange = { email = it },
+                        Modifier
+                            .weight(peso2)
+                            .padding(end = 10.dp),
+                        label = { Text(text = "Email") },
+                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = TransPurple,
+                            focusedIndicatorColor = Blue20
+                        )
+                    )
+                }
+                Spacer(modifier = Modifier.size(15.dp))
+                Row(
+                    Modifier
+                        .height(60.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Button(onClick = {
+                        if (nom.isEmpty() && nickname.isEmpty()) {
+                            errorTextName = "Error: Obligatorio"
+                            errorTextNickname = "Error: Obligatorio"
+                        } else if (nickname.isEmpty() && !nom.isEmpty()) {
+                            errorTextNickname = "Error: Obligatorio"
+                            errorTextName = "Listo"
+                        } else if (!nickname.isEmpty() && nom.isEmpty()) {
+                            errorTextNickname = "Listo"
+                            errorTextName = "Error: Obligatorio"
+                        } else {
+                            errorTextName = "Listo"
+                            errorTextNickname = "Listo"
+                        }
+                    }) {
+                        Text(text = "Add new player")
+
+                    }
+                }
+            }
+        }
+
+
+        else -> {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Spacer(modifier = Modifier.size(15.dp))
+                Row(
+                    Modifier
+                        .height(20.dp)
+                        .fillMaxSize(),
+                    horizontalArrangement = Arrangement.Center
+
+                ) {
+                    Text(
+                        text = "Elige una opción"
+                    )
+                }
+                Surface(
+                    modifier = Modifier.fillMaxSize()
+
+                ) {
+                    var estadoRadio by rememberSaveable { mutableStateOf("opción1") }
+                    MyRadioButton(estadoRadio) { estadoRadio = it }
+                }
+
+                Row(Modifier.padding(20.dp)) {
+                    Slider(
+                        value = selection,
+                        valueRange = range,
+                        steps = steps,
+                        onValueChange = { selection = it }
+                    )
+                }
+                //FloatingActionButton(FAB)
+
+            }
+        }
+    }
+
+}
+
+@Composable
+fun MyRadioButton(name: String, onItemSelected: (String) -> Unit) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(20.dp),
+
+        )
+    {
+        Row() {
+            RadioButton(selected = name == "angryBirds", onClick = {
+                onItemSelected("angryBirds")
+            },colors = RadioButtonDefaults.colors(selectedColor = Blue20))
+            Text(text = "Angry Birds", Modifier.padding(top = 12.dp))
+        }
+        Row() {
+            RadioButton(selected = name == "dragonFly", onClick = {
+                onItemSelected("dragonFly")
+            })
+            Text(text = "Dragon Fly", Modifier.padding(top = 12.dp))
+        }
+        Row() {
+            RadioButton(selected = name == "hillClimbingRacing", onClick = {
+                onItemSelected("hillClimbingRacing")
+            })
+            Text(text = "Hill Climbing Racing", Modifier.padding(top = 12.dp))
+        }
+        Row() {
+            RadioButton(selected = name == "pocketSoccer", onClick = {
+                onItemSelected("pocketSoccer")
+            })
+            Text(text = "Pocket Soccer", Modifier.padding(top = 12.dp))
+        }
+        Row() {
+            RadioButton(selected = name == "radiantDefense", onClick = {
+                onItemSelected("radiantDefense")
+            })
+            Text(text = "Radiant Defense", Modifier.padding(top = 12.dp))
+        }
+        Row() {
+            RadioButton(selected = name == "ninjaJump", onClick = {
+                onItemSelected("ninjaJump")
+            })
+            Text(text = "Ninja Jump", Modifier.padding(top = 12.dp))
+        }
+        Row() {
+            RadioButton(selected = name == "airControl", onClick = {
+                onItemSelected("airControl")
+            })
+            Text(text = "Air Control", Modifier.padding(top = 12.dp))
+        }
+    }
+}
+

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -444,7 +445,9 @@ fun NewPlayer() {
                     )
                 }
                 Spacer(modifier = Modifier.size(15.dp))
-                Row {
+                Row (modifier = Modifier.fillMaxWidth() ,
+                    horizontalArrangement = Arrangement.Center)
+                {
                     Button(onClick = { if(nom.isEmpty() && nickname.isEmpty()){
                         errorTextName = "Error: Obligatorio"
                         errorTextNickname = "Error: Obligatorio"

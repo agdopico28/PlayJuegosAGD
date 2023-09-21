@@ -59,12 +59,13 @@ fun Portada( navController: NavHostController){
         when (configuration.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> {
                 Column (modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
+                    Spacer(modifier = Modifier.size(10.dp))
                     Image(
-                        painter = painterResource(id = R.drawable.email),
+                        painter = painterResource(id = R.drawable.play),
                         contentDescription = "EmailImage",
-                        Modifier.width(30.dp).height(30.dp)
+                        Modifier.width(50.dp).height(50.dp)
                         )
-                    Spacer(modifier = Modifier.size(50.dp))
+                    Spacer(modifier = Modifier.size(20.dp))
                     Text(
                         text = stringResource(id = R.string.playJuegos),
                         fontSize = 40.sp,
@@ -83,7 +84,7 @@ fun Portada( navController: NavHostController){
                         }
                     }
                     Row{
-                        Button(onClick = { /*TODO*/ },modifier = Modifier.width(200.dp).padding(15.dp, 0.dp)) {
+                        Button(onClick = { navController.navigate("Preferences")},modifier = Modifier.width(200.dp).padding(15.dp, 0.dp)) {
                         Text(text = "Preferences")
                     }
                         Button(onClick = { /*TODO*/ }, modifier = Modifier.width(200.dp).padding(15.dp, 0.dp)) {
@@ -96,9 +97,9 @@ fun Portada( navController: NavHostController){
             else -> {
                 Column (modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
                     Image(
-                        painter = painterResource(id = R.drawable.email),
+                        painter = painterResource(id = R.drawable.play),
                         contentDescription = "EmailImage",
-                        Modifier.width(30.dp).height(30.dp)
+                        Modifier.width(80.dp).height(80.dp)
 
                     )
                     Spacer(modifier = Modifier.size(50.dp))
@@ -117,7 +118,7 @@ fun Portada( navController: NavHostController){
                     Button(onClick = {navController.navigate("NewPlayer")  }, modifier = Modifier.width(200.dp)) {
                         Text(text = "New Play")
                     }
-                    Button(onClick = { /*TODO*/ }, modifier = Modifier.width(200.dp)) {
+                    Button(onClick = { navController.navigate("Preferences") }, modifier = Modifier.width(200.dp)) {
                         Text(text = "Preferences")
                     }
                     Button(onClick = { /*TODO*/ }, modifier = Modifier.width(200.dp)) {
