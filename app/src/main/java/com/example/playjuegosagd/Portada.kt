@@ -112,7 +112,7 @@ fun Portada( navController: NavHostController){
 
                     Spacer(modifier = Modifier.size(50.dp))
 
-                    Button(onClick = { /*TODO*/ }, modifier = Modifier.width(200.dp)) {
+                    Button(onClick = { navController.navigate("Play") }, modifier = Modifier.width(200.dp)) {
                         Text(text = "Play")
                     }
                     Button(onClick = {navController.navigate("NewPlayer")  }, modifier = Modifier.width(200.dp)) {
