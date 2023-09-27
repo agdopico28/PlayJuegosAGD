@@ -1,8 +1,10 @@
 package com.example.playjuegosagd
 
 import android.content.res.Configuration
+import android.media.Image
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,7 +49,7 @@ fun Play() {
     val range = 0f..10f
     val steps = 9
     var selection by remember { mutableStateOf(5f) }
-    var estadoRadio by rememberSaveable { mutableStateOf(" ") }
+    var estadoCheck by rememberSaveable { mutableStateOf(" ") }
     var peso1 = 1f
     var peso2 = 2f
     var context = LocalContext.current
@@ -79,7 +81,6 @@ fun Play() {
 
                 ) {
 
-                    MyRadioButton(estadoRadio) { estadoRadio = it }
                 }
 
                 Row(Modifier.padding(20.dp)) {
@@ -95,7 +96,7 @@ fun Play() {
             Box (Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd){
                 FloatingActionButton(
                     onClick = {
-                        if (estadoRadio.contentEquals(" ")) {
+                        if (estadoCheck.contentEquals(" ")) {
                             Toast.makeText(
                                 context,
                                 "No has pulsado ninguna opcion",
@@ -104,7 +105,7 @@ fun Play() {
                         } else {
                             Toast.makeText(
                                 context,
-                                "Has seleccionado $estadoRadio con una puntuacion de $selection",
+                                "Has seleccionado $estadoCheck con una puntuacion de $selection",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -157,6 +158,7 @@ fun Play() {
                             "Pocket Soccer",
                             "Ninja Jump",
                             "Air Control"))
+                        val images : ArrayList<Image>
                         Column() {
                             myOptions.forEach {
                                 MyCheckBox(it)
@@ -174,7 +176,7 @@ fun Play() {
             Box (Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd){
                 FloatingActionButton(
                     onClick = {
-                        if (estadoRadio.contentEquals(" ")) {
+                        if (estadoCheck.contentEquals(" ")) {
                             Toast.makeText(
                                 context,
                                 "No has pulsado ninguna opcion",
@@ -183,7 +185,7 @@ fun Play() {
                         } else {
                             Toast.makeText(
                                 context,
-                                "Has seleccionado $estadoRadio con una puntuacion de $selection",
+                                "Has seleccionado $ con una puntuacion de $selection",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -207,8 +209,7 @@ fun Play() {
 }
 
 
-data class CheckInfo(var title:String, var selected:Boolean, var
-onCheckedChange:(Boolean)->Unit)
+data class CheckInfo(var title:String, var selected:Boolean, var onCheckedChange:(Boolean)->Unit,   /*@DrawableRes var image :Image*/)
 
 @Composable
 fun getOptions(titles: List<String>): List<CheckInfo> {
@@ -219,8 +220,9 @@ fun getOptions(titles: List<String>): List<CheckInfo> {
         CheckInfo(
             title = it,
             selected = estadoCheck,
-            onCheckedChange = { estadoCheck = it }
-        )
+            onCheckedChange = { estadoCheck = it },
+            //image =
+                )
     }
 }
 @Composable
