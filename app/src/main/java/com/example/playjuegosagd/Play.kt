@@ -2,9 +2,9 @@ package com.example.playjuegosagd
 
 import android.content.res.Configuration
 import android.media.Image
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,8 +23,6 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
@@ -39,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.playjuegosagd.ui.theme.Blue20
 import com.example.playjuegosagd.ui.theme.TransPurple
@@ -46,12 +45,7 @@ import com.example.playjuegosagd.ui.theme.TransPurple
 @Composable
 fun Play() {
     //Slider
-    val range = 0f..10f
-    val steps = 9
-    var selection by remember { mutableStateOf(5f) }
-    var estadoCheck by rememberSaveable { mutableStateOf(" ") }
-    var peso1 = 1f
-    var peso2 = 2f
+    var estadoCheck by rememberSaveable { mutableStateOf("") }
     var context = LocalContext.current
     val configuration = LocalConfiguration.current
     when (configuration.orientation) {
@@ -83,15 +77,7 @@ fun Play() {
 
                 }
 
-                Row(Modifier.padding(20.dp)) {
-                    Slider(
-                        value = selection,
-                        valueRange = range,
-                        steps = steps,
-                        onValueChange = { selection = it },
-                        colors = SliderDefaults.colors(inactiveTrackColor = TransPurple )
-                    )
-                }
+
             }
             Box (Modifier.fillMaxSize(), contentAlignment = Alignment.BottomEnd){
                 FloatingActionButton(
@@ -105,7 +91,7 @@ fun Play() {
                         } else {
                             Toast.makeText(
                                 context,
-                                "Has seleccionado $estadoCheck con una puntuacion de $selection",
+                                "Has seleccionado $estadoCheck ",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -127,6 +113,15 @@ fun Play() {
 
         else -> {
 
+            val myOptions = getOptions(listOf(
+                "Angry Birds",
+                "Dragon Fly",
+                "Hill Climbing Racing",
+                "Radiant Defense",
+                "Pocket Soccer",
+                "Ninja Jump",
+                "Air Control"))
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -135,30 +130,12 @@ fun Play() {
                 horizontalAlignment = Alignment.Start
             ) {
                 Spacer(modifier = Modifier.size(15.dp))
-                Row(
-                    Modifier
-                        .height(20.dp)
-                        .fillMaxSize(),
-                    horizontalArrangement = Arrangement.Center
-
-                ) {
-                    Text(
-                        text = "Elige una opción"
-                    )
-                }
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
+
+
                     Row (){
-                        val myOptions = getOptions(listOf(
-                            "Angry Birds",
-                            "Dragon Fly",
-                            "Hill Climbing Racing",
-                            "Radiant Defense",
-                            "Pocket Soccer",
-                            "Ninja Jump",
-                            "Air Control"))
-                        val images : ArrayList<Image>
                         Column() {
                             myOptions.forEach {
                                 MyCheckBox(it)
@@ -185,7 +162,7 @@ fun Play() {
                         } else {
                             Toast.makeText(
                                 context,
-                                "Has seleccionado $ con una puntuacion de $selection",
+                                "Has seleccionado $estadoCheck",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -209,7 +186,7 @@ fun Play() {
 }
 
 
-data class CheckInfo(var title:String, var selected:Boolean, var onCheckedChange:(Boolean)->Unit,   /*@DrawableRes var image :Image*/)
+data class CheckInfo(var title:String, var selected:Boolean, var onCheckedChange:(Boolean)->Unit, @DrawableRes var image :Int)
 
 @Composable
 fun getOptions(titles: List<String>): List<CheckInfo> {
@@ -221,8 +198,8 @@ fun getOptions(titles: List<String>): List<CheckInfo> {
             title = it,
             selected = estadoCheck,
             onCheckedChange = { estadoCheck = it },
-            //image =
-                )
+            image = 0
+        )
     }
 }
 @Composable
@@ -235,6 +212,16 @@ fun MyCheckBox(checkInfo: CheckInfo) {
         )
     {
         Row() {
+            when(checkInfo.title){
+                "Angry Birds" ->checkInfo.image = R.drawable.games_aircontrol
+                "Dragon Fly" -> checkInfo.image = R.drawable.games_dragonfly
+                "Hill Climbing Racing" -> checkInfo.image = R.drawable.games_hillclimbingracing
+                "Radiant Defense" -> checkInfo.image = R.drawable.games_radiantdefense
+                "Pocket Soccer" -> checkInfo.image = R.drawable.games_pocketsoccer
+                "Ninja Jump" -> checkInfo.image = R.drawable.games_ninjump
+                "Air Control" -> checkInfo.image = R.drawable.games_aircontrol
+            }
+            androidx.compose.foundation.Image(painter = painterResource(id = checkInfo.image), contentDescription = checkInfo.title, Modifier.size(70.dp))
             Checkbox(
                 checked = checkInfo.selected,
                 onCheckedChange = {
